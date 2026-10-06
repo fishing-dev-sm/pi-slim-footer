@@ -17,10 +17,10 @@ const CONFIG_PATH = join(homedir(), ".pi", "agent", "slim-footer.json");
 const hadConfig = existsSync(CONFIG_PATH);
 const configBackup = hadConfig ? readFileSync(CONFIG_PATH, "utf8") : null;
 
-// 临时配置：指定主题 + swarm-roster 放 +1 行（主行上方），展示多行管理
+// 临时配置：指定主题
 writeFileSync(
 	CONFIG_PATH,
-	JSON.stringify({ enabled: true, theme: themeName, pluginLines: { "swarm-roster": 1 }, axisMigrated: true }),
+	JSON.stringify({ enabled: true, theme: themeName }),
 );
 
 const theme = {
@@ -29,12 +29,6 @@ const theme = {
 		return `${a(fg)}${a(bg, true)}${text}\x1b[0m`;
 	},
 };
-
-// swarm 的真实 status 自带 ANSI 样式（青底 MANAGER / 白底 UUID / 黄底 LEADER），透传展示
-const SWARM_STATUS =
-	"\x1b[38;2;0;0;0m\x1b[48;2;6;182;212m ● MANAGER-01a1112c \x1b[0m" +
-	"\x1b[38;2;0;0;0m\x1b[48;2;226;232;240m 01a1112c-59c8 \x1b[0m" +
-	"\x1b[38;2;0;0;0m\x1b[48;2;202;138;4m LEADER \x1b[0m";
 
 const handlers = {};
 let footerFactory = null;
@@ -58,11 +52,8 @@ const ctx = {
 };
 const footerData = {
 	getGitBranch: () => "main",
-	getExtensionStatuses: () =>
-		new Map([
-			["pi-permission-system", "yolo"],
-			["swarm-roster", SWARM_STATUS],
-		]),
+	// 只留 yolo（AUTO 徽章来源），不带其他插件 status——只截主行本体
+	getExtensionStatuses: () => new Map([["pi-permission-system", "yolo"]]),
 	onBranchChange: () => () => {},
 };
 

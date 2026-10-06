@@ -165,3 +165,8 @@ pi-slim-footer/
 
 - 用户反馈截图不合格：去掉 mock 会话内容，只保留 footer 本体（插件行 + 主行），两主题各一图（1800×114）
 - render_lines.mjs 移除 mock 块，只写 footer.render() 返回的行；npm 无需重发（docs/ 不在 files 内，README 引用 raw GitHub URL 即时生效）
+
+### 截图修正 2：只留主行一行
+
+- 用户再次反馈：MANAGER 插件行也不要，只有 slim-footer 主行一行的截图（1800×77）
+- render_lines.mjs 移除 swarm-roster status 与 pluginLines，getExtensionStatuses 只留 yolo
