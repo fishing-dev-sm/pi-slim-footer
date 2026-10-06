@@ -1,0 +1,13 @@
+{
+	"enabled": true,
+	"theme": "badges",
+	"saturation": {
+		"badgeSat": 0.3,
+		"badgeLum": 0.72,
+		"foreSat": 0.4
+	},
+	"pluginLines": {
+		"swarm-roster": 1,
+		"some-noisy-extension": -2
+	}
+}

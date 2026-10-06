@@ -1,0 +1,38 @@
+{
+	"name": "pi-slim-footer",
+	"version": "0.3.2",
+	"description": "1-line footer for pi — FACC-style truecolor badges: permission mode, model, ctx gauge, git, tps, cost. Never wraps.",
+	"type": "module",
+	"main": "src/index.ts",
+	"license": "MIT",
+	"files": [
+		"src/index.ts",
+		"demo.mjs",
+		"config.example.json",
+		"README.md"
+	],
+	"keywords": [
+		"pi",
+		"pi-extension",
+		"footer",
+		"statusline",
+		"tui"
+	],
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
+	"devDependencies": {
+		"@earendil-works/pi-coding-agent": "^1.0.4",
+		"@earendil-works/pi-tui": "^1.0.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fishing-dev-sm/pi-slim-footer.git"
+	},
+	"homepage": "https://github.com/fishing-dev-sm/pi-slim-footer#readme",
+	"bugs": {
+		"url": "https://github.com/fishing-dev-sm/pi-slim-footer/issues"
+	}
+}
