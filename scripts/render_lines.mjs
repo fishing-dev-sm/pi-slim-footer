@@ -82,22 +82,6 @@ const lines = footer.render(WIDTH);
 if (configBackup !== null) writeFileSync(CONFIG_PATH, configBackup);
 else if (existsSync(CONFIG_PATH)) unlinkSync(CONFIG_PATH);
 
-// ── mock 会话内容（暗色，突出 footer；与 footer 同一 ANSI 真色编码）──
-const c = (r, g, b) => (s) => `\x1b[38;2;${r};${g};${b}m${s}\x1b[0m`;
-const user = c(148, 163, 184);
-const dim = c(88, 91, 112);
-const faint = c(68, 70, 90);
-const mock = [
-	user("  ❯ 把 footer 换成 pi-slim-footer，双主题，插件状态另起一行"),
-	"",
-	dim("  ● Read(src/index.ts)"),
-	dim("  ● Edit(src/index.ts)"),
-	dim("  ● Bash(node --experimental-strip-types e2e.mjs)"),
-	faint("    ⎿  ✓ E2E 结果：76 PASS / 0 FAIL"),
-	"",
-	dim("  * Cogitated for 4.2s"),
-	"",
-];
-
-writeFileSync(outPath, [...mock, ...lines].join("\n"));
-console.log(`✅ ${outPath}（${mock.length + lines.length} 行 × ${WIDTH} 列）`);
+// 只截 footer 本体（插件行 + 主行），不带任何会话内容
+writeFileSync(outPath, lines.join("\n"));
+console.log(`✅ ${outPath}（${lines.length} 行 × ${WIDTH} 列）`);

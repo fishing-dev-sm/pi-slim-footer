@@ -160,3 +160,8 @@ pi-slim-footer/
 - 9 语言：README.md(English 主) + README.{zh-CN,es,fr,de,ja,ko,pt,ru}.md，顶部语言切换条（相对链接，当前语言加粗）
 - 英文版为 canonical；安装段改 npm:pi-slim-footer 优先；顺带修正过时信息（断言数 63→76、丢弃序移除已废弃的内联 status 优先级）；FACC 链接改为绝对 GitHub URL
 - package.json files 加 "README*.md"（npm 默认只带 README.md）
+
+### 截图修正（v0.3.3 之后）：只截 footer 本体
+
+- 用户反馈截图不合格：去掉 mock 会话内容，只保留 footer 本体（插件行 + 主行），两主题各一图（1800×114）
+- render_lines.mjs 移除 mock 块，只写 footer.render() 返回的行；npm 无需重发（docs/ 不在 files 内，README 引用 raw GitHub URL 即时生效）
