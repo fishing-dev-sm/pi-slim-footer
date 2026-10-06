@@ -145,3 +145,12 @@ pi-slim-footer/
 - 问题：行号菜单列表是 +1..+9 升序，视觉上 +1 离主行最远，违反数轴直觉
 - 修法：LINES 改为 [+9..+1, -1..-9]——列表自上而下即数轴从上往下看（+1 紧贴主行上方，-1 紧贴下方）
 - E2E：e2e.mjs 76/76（新增菜单选项顺序断言：options[0]=Line +9, [8]=Line +1, [9]=Line -1, [17]=Line -9，共 18 项）
+
+### v0.3.2：README 示例图 + GitHub 发布
+
+- 用户要求：不用真实终端截图（会混入指针/窗口装饰等杂质），纯程序渲染两种主题示例图
+- 管线：scripts/render_lines.mjs（真实 src/index.ts + 假 runtime 出 ANSI 真色行，swarm 自带样式透传、60tps 模拟）
+  → scripts/ansi2png.py（PIL 逐格绘制；字体链 JetBrainsMono NFM→FreeMono(⎇)→Noto Sans Mono CJK SC；fontTools cmap 判覆盖）
+  → scripts/screenshots.sh 一键重生成；产物 docs/screenshots/theme-{badges,mixed}.png（1800×447）
+- README 顶部插图（raw.githubusercontent.com 绝对 URL，npm 页可显示）；package.json 加 repository/homepage/bugs
+- 首次 git init 推送到 github.com/fishing-dev-sm/pi-slim-footer（SSH alias github-fishing，须带 git@ 前缀）
