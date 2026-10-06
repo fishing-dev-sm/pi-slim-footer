@@ -1,6 +1,6 @@
 {
 	"name": "pi-slim-footer",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"description": "1-line footer for pi — FACC-style truecolor badges: permission mode, model, ctx gauge, git, tps, cost. Never wraps.",
 	"type": "module",
 	"main": "src/index.ts",
@@ -9,7 +9,7 @@
 		"src/index.ts",
 		"demo.mjs",
 		"config.example.json",
-		"README.md"
+		"README*.md"
 	],
 	"keywords": [
 		"pi",

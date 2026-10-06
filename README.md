@@ -1,50 +1,62 @@
 # pi-slim-footer
 
-**badges**（全徽章主题）
+<p align="center">
+  <a href="README.md"><strong>English</strong></a> |
+  <a href="README.zh-CN.md">简体中文</a> |
+  <a href="README.es.md">Español</a> |
+  <a href="README.fr.md">Français</a> |
+  <a href="README.de.md">Deutsch</a> |
+  <a href="README.ja.md">日本語</a> |
+  <a href="README.ko.md">한국어</a> |
+  <a href="README.pt.md">Português</a> |
+  <a href="README.ru.md">Русский</a>
+</p>
+
+**badges** theme (all inverted badges)
 
 ![badges theme](https://raw.githubusercontent.com/fishing-dev-sm/pi-slim-footer/main/docs/screenshots/theme-badges.png)
 
-**mixed**（状态彩色 + 数据暗文主题）
+**mixed** theme (colored status badges + muted data text)
 
 ![mixed theme](https://raw.githubusercontent.com/fishing-dev-sm/pi-slim-footer/main/docs/screenshots/theme-mixed.png)
 
-> 截图为纯程序渲染（`scripts/screenshots.sh`：真实 `src/index.ts` 出 ANSI 行 → PIL 逐格画 PNG），无终端截图杂质。
+> Screenshots are rendered purely programmatically (`scripts/screenshots.sh`: real `src/index.ts` emits ANSI lines → PIL draws the PNG cell by cell) — no terminal-screenshot artifacts.
 
-pi 的单行 footer 扩展——严格一行、真色徽章、窄终端智能丢弃。替代 statusline-pi。
+A one-line footer extension for [pi](https://pi.dev) — strictly one line, true-color badges, smart segment dropping on narrow terminals. Replaces statusline-pi.
 
-## 效果
+## Preview
 
 ```
  AUTO   deepseek/deepseek-v4-pro high   CTX ⣀⣀⣀⣀⣀⣀⣀⣀ 0.0%·1M   ⎇ main   -- tps   $0.026        ~/code/pi-fleet
 ```
 
-宽终端（badges 主题，真色反白徽章）：模式 / 模型+思考档 / CTX(braille+%+窗口) / git / tps / cost，目录右对齐。
+Wide terminal (badges theme, true-color inverted badges): mode / model + thinking level / CTX (braille + % + window) / git / tps / cost; directory right-aligned.
 
-## 特性
+## Features
 
-- **主行严格单行**：我们自己的内容独占第 0 行，任何宽度下绝不换行；放不下按优先级丢弃
-- **插件行管理**：其他插件的 `setStatus` 内容必须另起一行（默认 -1，主行下方一行），`/slim-footer` 里按数轴坐标分配行号（**正数在主行上方，负数在下方**）；**同号挤一行**（一个空格分隔），异号各占一行。菜单提供 ±1..±9 共 18 个槽位，配置文件可手写 ±99 任意整数
-- **丢弃序**（数字大先丢）：`cost(6) → 其他扩展 status(5) → tps(4) → git(3) → CTX(2) → 模型(1) → 权限模式(0 永不丢)`
-- **权限模式一等公民**：permission-system 的 `yolo` 渲染为黄底 ` AUTO ` 徽章（不再是裸文本第二行）；预留 `plan`→` PLAN `、`ask`→` ASK WHEN NEED `；其他扩展 status 原样灰徽章
-- **两个主题**，`/slim-footer` 切换：
-  - `badges`（A）：全反白徽章，FACC 风格
-  - `mixed`（B）：状态彩色徽章 + 数据暗色文字，低刺激
-- **情绪色**：CTX 绿→黄→橙→红→深红五段；tps 按速度变色（<10 蓝 / <30 青 / <60 绿 / ≥60 橙）
-- **低饱和调色板**：HSL 降饱和（可配置），长时间盯屏不刺眼
+- **Main line strictly single-line**: our own content owns line 0 and never wraps at any width; segments that don't fit are dropped by priority
+- **Plugin line management**: other plugins' `setStatus` content must go on separate lines (default `-1`, right below the main line). `/slim-footer` assigns line numbers on a number-line axis (**positive = above the main line, negative = below**); **same number = share one line** (space-separated), different numbers get separate lines. The menu offers ±1..±9 (18 slots); the config file accepts any integer in ±99
+- **Drop order** (higher number drops first): `cost(5) → tps(4) → git(3) → CTX(2) → model(1) → permission mode (0, never dropped)`
+- **Permission mode as a first-class citizen**: permission-system's `yolo` renders as a yellow ` AUTO ` badge (no longer a bare-text second line); `plan` → ` PLAN ` and `ask` → ` ASK WHEN NEED ` are reserved; other extension statuses get a plain gray badge
+- **Two themes**, switch via `/slim-footer`:
+  - `badges` (A): all inverted badges, FACC style
+  - `mixed` (B): colored status badges + muted data text, low-stimulation
+- **Mood colors**: CTX green → yellow → orange → red → dark red (5 levels); tps colored by speed (<10 blue / <30 teal / <60 green / ≥60 orange)
+- **Low-saturation palette**: HSL desaturation (configurable) — easy on the eyes during long sessions
 
-## 安装
+## Installation
 
-`~/.pi/agent/settings.json` 的 `packages` 加本地路径（或发布后 `npm:pi-slim-footer`），并移除 `npm:statusline-pi`（两者都会接管 footer）：
+Add `npm:pi-slim-footer` (or a local path) to `packages` in `~/.pi/agent/settings.json`, and remove `npm:statusline-pi` (both take over the footer):
 
 ```json
 {
-  "packages": ["../../code/pi-slim-footer", "...其他包..."]
+  "packages": ["npm:pi-slim-footer", "...other packages..."]
 }
 ```
 
-## 配置
+## Configuration
 
-`~/.pi/agent/slim-footer.json`（全部可选，见 [config.example.json](config.example.json)）：
+`~/.pi/agent/slim-footer.json` (all optional, see [config.example.json](config.example.json)):
 
 ```json
 {
@@ -55,43 +67,43 @@ pi 的单行 footer 扩展——严格一行、真色徽章、窄终端智能丢
 }
 ```
 
-## 命令
+## Command
 
-`/slim-footer` — 菜单：
+`/slim-footer` — menu:
 
-1. 切换主题 badges / mixed
-2. **Plugin line positions…** — 列出所有注册了 footer status 的插件（显示当前 status 预览），逐个分配行号（数轴坐标）：
+1. Switch theme badges / mixed
+2. **Plugin line positions…** — lists all plugins that registered a footer status (with a preview of the current status) and assigns a line number (number-line coordinate) to each:
    ```
-   Line +9 … +2 / +1   → 主行上方（+1 紧贴主行）
-   Line  0             → slim-footer 主行（不开放给插件）
-   Line -1 / -2 … -9   → 主行下方（-1 紧贴主行，默认 -1）
+   Line +9 … +2 / +1   → above the main line (+1 is closest to it)
+   Line  0             → slim-footer main line (not available to plugins)
+   Line -1 / -2 … -9   → below the main line (-1 is closest, default -1)
    ```
-   同一行号的插件挤在一行，空格分隔；行号持久化到 `pluginLines`（配置文件接受 ±99）
+   Plugins with the same line number share one line, space-separated; line numbers persist to `pluginLines` (the config file accepts ±99).
 
-   > v0.3.0 起坐标轴为数轴语义（正上负下）；旧版配置（正下负上）首次加载自动取反迁移并写回 `axisMigrated` 标记。
+   > Since v0.3.0 the axis uses number-line semantics (positive = up). Old configs (positive = down) are auto-negated on first load and written back with an `axisMigrated` flag.
 
-   插件 status 的渲染规则：**自带 ANSI 样式的文本原样透传**（如 pi-agent-swarm 的青底 MANAGER 徽章），纯文本才包我们的灰徽章。
-3. 启用 / 停用（停用恢复 pi 默认 footer）
+   Plugin status rendering rule: **text that already carries ANSI styles is passed through verbatim** (e.g. pi-agent-swarm's cyan `MANAGER` badge); plain text gets our gray badge.
+3. Enable / disable (disabling restores pi's default footer)
 
-## 数据来源
+## Data sources
 
-| 段 | 来源 |
+| Segment | Source |
 |---|---|
-| 模式徽章 | `footerData.getExtensionStatuses()` 中值为已知模式的项（yolo/plan/ask） |
-| 插件行 | `footerData.getExtensionStatuses()` 中其余项，按 `pluginLines` 分行 |
-| 模型/思考档 | `ctx.model` + `pi.getThinkingLevel()` |
+| Mode badge | Entries in `footerData.getExtensionStatuses()` whose value is a known mode (yolo/plan/ask) |
+| Plugin lines | All other entries from `footerData.getExtensionStatuses()`, split by `pluginLines` |
+| Model / thinking level | `ctx.model` + `pi.getThinkingLevel()` |
 | CTX | `ctx.model.contextWindow` + `ctx.getContextUsage().tokens` |
-| git | `footerData.getGitBranch()`（pi 内置，不 exec git） |
-| tps | `message_start/update/end` 事件估算（抄 statusline-pi） |
-| cost | 会话分支 assistant `usage.cost.total` 累计 |
+| git | `footerData.getGitBranch()` (built into pi, no git exec) |
+| tps | Estimated from `message_start/update/end` events (borrowed from statusline-pi) |
+| cost | Sum of assistant `usage.cost.total` along the session branch |
 
-## 测试（E2E）
+## Tests (E2E)
 
 ```bash
-node --experimental-strip-types e2e.mjs   # 模拟 runtime 全链路（63 断言）
-python3 e2e_tui.py                        # 真实 pi TUI（pty 驱动，14 断言）→ docs/e2e/report.md
+node --experimental-strip-types e2e.mjs   # simulated runtime, full chain (76 assertions)
+python3 e2e_tui.py                        # real pi TUI driven over a pty (14 assertions) → docs/e2e/report.md
 ```
 
-## 设计
+## Design
 
-见 [PLAN.md](PLAN.md)。视觉语言源自 [famous-anime-cache-countdown](../famous-anime-cache-countdown)。
+See [PLAN.md](PLAN.md). Visual language originates from [famous-anime-cache-countdown](https://github.com/fishing-dev-sm/pi-famous-anime-cache-countdown).

@@ -154,3 +154,9 @@ pi-slim-footer/
   → scripts/screenshots.sh 一键重生成；产物 docs/screenshots/theme-{badges,mixed}.png（1800×447）
 - README 顶部插图（raw.githubusercontent.com 绝对 URL，npm 页可显示）；package.json 加 repository/homepage/bugs
 - 首次 git init 推送到 github.com/fishing-dev-sm/pi-slim-footer（SSH alias github-fishing，须带 git@ 前缀）
+
+### v0.3.3：多语言 README（对齐 pi-fleet 模式）
+
+- 9 语言：README.md(English 主) + README.{zh-CN,es,fr,de,ja,ko,pt,ru}.md，顶部语言切换条（相对链接，当前语言加粗）
+- 英文版为 canonical；安装段改 npm:pi-slim-footer 优先；顺带修正过时信息（断言数 63→76、丢弃序移除已废弃的内联 status 优先级）；FACC 链接改为绝对 GitHub URL
+- package.json files 加 "README*.md"（npm 默认只带 README.md）
